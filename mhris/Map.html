@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenStreetMap with Leaflet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <style>
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Customize the routing panel to be smaller */
+        .leaflet-routing-container {
+            max-width: 200px;
+            font-size: 12px;
+            display: none; /* Initially hide the routing panel */
+        }
+
+        .leaflet-routing-alt {
+            font-size: 12px;
+        }
+
+        .toggle-routing-btn {
+            position: absolute;
+            top: 10px;
+            left: 50px;
+            z-index: 1000;
+            background: white;
+            padding: 5px;
+            border: 2px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        var map;
+        var userMarker;
+        var targetMarker;
+        var targetLocation = [10.3715267, 123.9344896]; // Correct target location in the Philippines
+        var routingControl;
+        var toggleDirections = false;
+
+        var redIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+            shadowSize: [41, 41]
+        });
+
+        function initMap() {
+            console.log("Initializing map...");
+            map = L.map('map').setView(targetLocation, 15); // Center map on target location
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            setTargetLocation(targetLocation[0], targetLocation[1]);
+
+            // Add toggle button for the routing panel
+            var toggleRoutingBtn = L.DomUtil.create('div', 'toggle-routing-btn');
+            toggleRoutingBtn.innerHTML = 'Directions';
+            L.DomEvent.on(toggleRoutingBtn, 'click', setToggleDirections);
+            L.DomUtil.get(map.getContainer()).appendChild(toggleRoutingBtn);
+        }
+
+        function setToggleDirections()
+        {
+            toggleDirections = !toggleDirections;
+            toggleRoutingPanel(toggleDirections);
+        }
+
+        function setTargetLocation(lat, lng) {
+            console.log("Setting target location to:", lat, lng);
+            targetLocation = [lat, lng];
+            if (!targetMarker) {
+                targetMarker = L.marker(targetLocation, { icon: redIcon }).addTo(map)
+                    .bindPopup('Target location')
+                    .openPopup();
+            } else {
+                targetMarker.setLatLng(targetLocation);
+            }
+            map.setView(targetLocation, 15); // Center map on target location and set zoom level
+
+            if (userMarker) {
+                fitBoundsToMarkers(); // Fit bounds to markers only when both markers are present
+            }
+        }
+
+        function updateUserLocation(lat, lng) {
+            console.log("Updating user location to:", lat, lng);
+            var userLocation = [lat, lng];
+            if (!userMarker) {
+                userMarker = L.marker(userLocation).addTo(map)
+                    .bindPopup('You are here')
+                    .openPopup();
+            } else {
+                userMarker.setLatLng(userLocation);
+            }
+
+            addRoute(userLocation, targetLocation);
+        }
+
+        function fitBoundsToMarkers() {
+            console.log("Fitting bounds to markers...");
+            if (userMarker && targetMarker) {
+                var group = new L.featureGroup([userMarker, targetMarker]);
+                map.fitBounds(group.getBounds().pad(0.5)); // Pad to ensure both markers are comfortably visible
+            }
+        }
+
+        function addRoute(start, end) {
+            console.log("Adding route from", start, "to", end);
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
+
+            routingControl = L.Routing.control({
+                waypoints: [
+                    L.latLng(start),
+                    L.latLng(end)
+                ],
+                routeWhileDragging: true,
+                createMarker: function () { return null; }, // Disable default markers
+                fitSelectedRoutes: false
+            }).addTo(map);
+
+            routingControl.on('routesfound', function (e) {
+                var routes = e.routes;
+                var summary = routes[0].summary;
+                var travelTime = summary.totalTime / 3600; // Convert travel time from seconds to hours
+
+                console.log('Travel time:', travelTime.toFixed(2), 'hours');
+                userMarker.bindPopup('Travel time: ' + travelTime.toFixed(2) + ' hour(s)').openPopup();
+
+                // Fit the map bounds to include both the user and target markers
+                fitBoundsToMarkers();
+            });
+
+            toggleRoutingPanel(toggleDirections); // Hide the routing panel initially
+        }
+
+        function toggleRoutingPanel(forceOpen) {
+            var routingContainer = document.querySelector('.leaflet-routing-container');
+            if (forceOpen !== undefined) {
+                routingContainer.style.display = forceOpen ? 'block' : 'none';
+            } else {
+                routingContainer.style.display = routingContainer.style.display === 'none' ? 'block' : 'none';
+            }            
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            initMap();
+        });
+    </script>
+</head>
+<body>
+    <div id="map"></div>
+</body>
+</html>
