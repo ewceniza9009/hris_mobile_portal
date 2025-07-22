@@ -21,6 +21,11 @@ namespace mhris.Models
         public decimal TotalTardyAmount { get; set; }
         public decimal TotalAbsentAmount { get; set; }
         public decimal TotalNetSalaryAmount { get; set; }
+        public decimal TotalLegalHolidayWorkingAmount { get; set; }
+        public decimal TotalSpecialHolidayWorkingAmount { get; set; }
+        public decimal TotalRegularNightAmount { get; set; }
+        public decimal TotalRegularOvertimeAmount { get; set; }
+        public decimal ComputedRegularRestdayAmount { get; set; }
         public decimal TotalOtherIncomeTaxable { get; set; }
         public decimal GrossIncome { get; set; }
         public decimal TotalOtherIncomeNonTaxable { get; set; }
