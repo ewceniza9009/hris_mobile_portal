@@ -6,7 +6,7 @@ namespace mhris
 {
     internal class Global
     {
-        public static string UriBase => "https://liteclerk-hr.liteclerk.com";
+        public static string UriBase => "https://cebucubeice.com";
         public static string LoginCode { get; set; }
     }
 }

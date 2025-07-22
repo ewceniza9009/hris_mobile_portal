@@ -25,6 +25,212 @@
         <StackLayout Margin="5">
             <tabview:SfTabView x:Name="mhrisTab" EnableSwiping="False">
                 <tabview:SfTabView.Items>
+                    <tabview:SfTabItem Title="PAYSLIP">
+                        <tabview:SfTabItem.Content>
+                            <ScrollView>
+                                <StackLayout Margin="5">
+                                    <StackLayout Orientation="Horizontal">
+                                        <comboBox:SfComboBox x:Name="PayrollId"
+                                                      HorizontalOptions="FillAndExpand"
+                                                      DataSource="{Binding PayrollNumbers}"
+                                                      SelectedItem="{Binding SelectedPayrollNumber}"
+                                                      DisplayMemberPath="PayrollNumber"
+                                                      SuggestionMode="Contains"
+                                                      SelectionChanged="PayrollId_SelectionChanged">
+                                        </comboBox:SfComboBox>
+                                    </StackLayout>
+                                    <Line/>
+                                    <Label Text="{Binding PaySlip.FullName}" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Company: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.Company}" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Payroll Number: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.PayrollNumber}" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Payroll Date: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.PayrollDate, StringFormat='{0:d}'}" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Basic Salary: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.BasicSalary, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Other Salary (OT/HDay): " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.OtherSalary, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Breakdown: " FontAttributes="Bold" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Legal Holiday: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalLegalHolidayWorkingAmount , StringFormat='{0:N2}'}" 
+HorizontalOptions="EndAndExpand" 
+HorizontalTextAlignment="End"/>
+
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Special Holiday: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalSpecialHolidayWorkingAmount, StringFormat='{0:N2}'}" 
+HorizontalOptions="EndAndExpand" 
+HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Night Diff: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalRegularNightAmount, StringFormat='{0:N2}'}" 
+HorizontalOptions="EndAndExpand" 
+HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Overtime: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalRegularOvertimeAmount, StringFormat='{0:N2}'}" 
+HorizontalOptions="EndAndExpand" 
+HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Restday: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.ComputedRegularRestdayAmount, StringFormat='{0:N2}'}" 
+HorizontalOptions="EndAndExpand" 
+HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Total Salary: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalSalaryAmount, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="LESS: Tardy: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalTardyAmou`nt, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Absent: " Margin="50,0,0,0" />
+                                        <Label Text="{Binding PaySlip.TotalAbsentAmount, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Net Salary: " FontAttributes="Bold" />
+                                        <Label Text="{Binding PaySlip.TotalNetSalaryAmount, StringFormat='{0:N2}'}" 
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Other Income (Txbl): " />
+                                        <Label Text="{Binding PaySlip.TotalOtherIncomeTaxable, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Income: " />
+                                        <Label Text="{Binding PaySlip.GrossIncome, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Other Income (Non-Txbl): " />
+                                        <Label Text="{Binding PaySlip.TotalOtherIncomeNonTaxable, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Gross Income: " />
+                                        <Label Text="{Binding PaySlip.GrossIncomeWithNonTaxable, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Mand. Deductions: " FontAttributes="Bold"/>
+                                        <Label Text="Amount" 
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="SSS Contribution: " />
+                                        <Label Text="{Binding PaySlip.SSSContribution, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="PHIC: " />
+                                        <Label Text="{Binding PaySlip.PHICContribution, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="HDMF: " />
+                                        <Label Text="{Binding PaySlip.HDMFContribution, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Withholding Tax: " />
+                                        <Label Text="{Binding PaySlip.Tax, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Mand. Deductions Total: " FontAttributes="Bold" />
+                                        <Label Text="{Binding PaySlip.TotalDeduction, StringFormat='{0:N2}'}" 
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Other Deductions: " />
+                                        <Label Text="{Binding PaySlip.TotalOtherDeduction, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout x:Name="StackOtherDeductionBreakdown" Orientation="Horizontal" Margin="0,10,0,0">
+                                        <richTextEditor:SfRichTextEditor x:Name="OtherDeductionBreakdown" 
+                                                                  Text="{Binding PaySlip.OtherDeductionBreakdown}"
+                                                                  ReadOnly="True"
+                                                                  ShowToolbar="False"
+                                                                  BackgroundColor="#fffafafa"
+                                                                  HorizontalOptions="EndAndExpand"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Ttl Working Hrs: " />
+                                        <Label Text="{Binding PaySlip.TotalWorkingHours, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Leave Balance: " />
+                                        <Label Text="{Binding PaySlip.LeaveBalance, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Loan Balance: " />
+                                        <Label Text="{Binding PaySlip.LoanBalance, StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Net Pay: " FontAttributes="Bold"/>
+                                        <Label Text="{Binding PaySlip.NetIncome, StringFormat='{0:N2}'}" 
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ScrollView>
+                        </tabview:SfTabItem.Content>
+                    </tabview:SfTabItem>
                     <tabview:SfTabItem Title="BIOMETRIC" IsVisible="True">
                         <tabview:SfTabItem.Content>                            
                             <StackLayout>
@@ -90,177 +296,7 @@
                         <tabview:SfTabItem.Content>
                             <renderers:MWebView x:Name="mapWebView"
                                  VerticalOptions="FillAndExpand"
-                                 HorizontalOptions="FillAndExpand" />                   
-                        </tabview:SfTabItem.Content>
-                    </tabview:SfTabItem>
-                    <tabview:SfTabItem Title="PAYSLIP">
-                        <tabview:SfTabItem.Content>
-                            <ScrollView>
-                                <StackLayout Margin="5">
-                                    <StackLayout Orientation="Horizontal">                                        
-                                        <comboBox:SfComboBox x:Name="PayrollId"
-                                                             HorizontalOptions="FillAndExpand"
-                                                             DataSource="{Binding PayrollNumbers}"
-                                                             SelectedItem="{Binding SelectedPayrollNumber}"
-                                                             DisplayMemberPath="PayrollNumber"
-                                                             SuggestionMode="Contains"
-                                                             SelectionChanged="PayrollId_SelectionChanged">
-                                        </comboBox:SfComboBox>
-                                    </StackLayout>
-                                    <Line/>
-                                    <Label Text="{Binding PaySlip.FullName}" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14"/>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Company: " WidthRequest="150"/>
-                                        <Label Text="{Binding PaySlip.Company}" />
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Payroll Number: " WidthRequest="150"/>
-                                        <Label Text="{Binding PaySlip.PayrollNumber}" />
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Payroll Date: " WidthRequest="150"/>
-                                        <Label Text="{Binding PaySlip.PayrollDate, StringFormat='{0:d}'}" />
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Basic Salary: " WidthRequest="150"/>
-                                        <Label Text="{Binding PaySlip.BasicSalary, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Other Salary (OT/HDay): " WidthRequest="150"/>
-                                        <Label Text="{Binding PaySlip.OtherSalary, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Total Salary: " WidthRequest="150"/>
-                                        <Label Text="{Binding PaySlip.TotalSalaryAmount, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="LESS: Tardy: " WidthRequest="150"/>
-                                        <Label Text="{Binding PaySlip.TotalTardyAmount, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Absent: " Margin="50,0,0,0" />
-                                        <Label Text="{Binding PaySlip.TotalAbsentAmount, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Net Salary: " FontAttributes="Bold" />
-                                        <Label Text="{Binding PaySlip.TotalNetSalaryAmount, StringFormat='{0:N2}'}" 
-                                           FontAttributes="Bold"
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Other Income (Txbl): " />
-                                        <Label Text="{Binding PaySlip.TotalOtherIncomeTaxable, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Income: " />
-                                        <Label Text="{Binding PaySlip.GrossIncome, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Other Income (Non-Txbl): " />
-                                        <Label Text="{Binding PaySlip.TotalOtherIncomeNonTaxable, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Gross Income: " />
-                                        <Label Text="{Binding PaySlip.GrossIncomeWithNonTaxable, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Mand. Deductions: " FontAttributes="Bold"/>
-                                        <Label Text="Amount" 
-                                           FontAttributes="Bold"
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="SSS Contribution: " />
-                                        <Label Text="{Binding PaySlip.SSSContribution, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="PHIC: " />
-                                        <Label Text="{Binding PaySlip.PHICContribution, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="HDMF: " />
-                                        <Label Text="{Binding PaySlip.HDMFContribution, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Withholding Tax: " />
-                                        <Label Text="{Binding PaySlip.Tax, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Mand. Deductions Total: " FontAttributes="Bold" />
-                                        <Label Text="{Binding PaySlip.TotalDeduction, StringFormat='{0:N2}'}" 
-                                           FontAttributes="Bold"
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Other Deductions: " />
-                                        <Label Text="{Binding PaySlip.TotalOtherDeduction, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout x:Name="StackOtherDeductionBreakdown" Orientation="Horizontal" Margin="0,10,0,0">
-                                        <richTextEditor:SfRichTextEditor x:Name="OtherDeductionBreakdown" 
-                                                                         Text="{Binding PaySlip.OtherDeductionBreakdown}"
-                                                                         ReadOnly="True"
-                                                                         ShowToolbar="False"
-                                                                         BackgroundColor="#fffafafa"
-                                                                         HorizontalOptions="EndAndExpand"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Ttl Working Hrs: " />
-                                        <Label Text="{Binding PaySlip.TotalWorkingHours, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Leave Balance: " />
-                                        <Label Text="{Binding PaySlip.LeaveBalance, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Loan Balance: " />
-                                        <Label Text="{Binding PaySlip.LoanBalance, StringFormat='{0:N2}'}" 
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Net Pay: " FontAttributes="Bold"/>
-                                        <Label Text="{Binding PaySlip.NetIncome, StringFormat='{0:N2}'}" 
-                                           FontAttributes="Bold"
-                                           HorizontalOptions="EndAndExpand" 
-                                           HorizontalTextAlignment="End"/>
-                                    </StackLayout>
-                                </StackLayout>
-                            </ScrollView>
+                                 HorizontalOptions="FillAndExpand" />
                         </tabview:SfTabItem.Content>
                     </tabview:SfTabItem>
                     <tabview:SfTabItem Title="DTR" >
