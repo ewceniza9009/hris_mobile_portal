@@ -66,39 +66,66 @@
                                     HorizontalTextAlignment="End"/>
                                     </StackLayout>
 
+                 
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Breakdown: " FontAttributes="Bold" />
+                                        <Label Text="Breakdown: " FontAttributes="Bold" VerticalOptions="Center"/>
+                                        <Label Text="Hrs" FontAttributes="Bold" VerticalOptions="Center" HorizontalTextAlignment="Center" Margin="80,0,0,0"/>
                                     </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Legal Holiday: " WidthRequest="150"/>
-                                        <Label Text="{Binding PaySlip.TotalLegalHolidayWorkingAmount , StringFormat='{0:N2}'}" 
-HorizontalOptions="EndAndExpand" 
-HorizontalTextAlignment="End"/>
 
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Legal Holiday: " WidthRequest="150" VerticalOptions="Center"/>
+
+
+                                        <Label Text="{Binding PaySlip.TotalLegalHolidayWorkingHours, StringFormat='{0:N2}'}" 
+                                    WidthRequest="50"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"/>
+
+                                        <Label Text="{Binding PaySlip.TotalLegalHolidayWorkingAmount , StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"
+                                    VerticalOptions="Center"/>
                                     </StackLayout>
+                                    
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
                                         <Label Text="Special Holiday: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalSpecialHolidayWorkingHours, StringFormat='{0:N2}'}" 
+                                    WidthRequest="50"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"/>
                                         <Label Text="{Binding PaySlip.TotalSpecialHolidayWorkingAmount, StringFormat='{0:N2}'}" 
-HorizontalOptions="EndAndExpand" 
-HorizontalTextAlignment="End"/>
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
                                         <Label Text="Night Diff: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalRegularNightHours, StringFormat='{0:N2}'}" 
+                                    WidthRequest="50"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"/>
                                         <Label Text="{Binding PaySlip.TotalRegularNightAmount, StringFormat='{0:N2}'}" 
-HorizontalOptions="EndAndExpand" 
-HorizontalTextAlignment="End"/>
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
                                         <Label Text="Overtime: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalRegularOvertimeHours, StringFormat='{0:N2}'}" 
+                                    WidthRequest="50"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"/>
                                         <Label Text="{Binding PaySlip.TotalRegularOvertimeAmount, StringFormat='{0:N2}'}" 
-HorizontalOptions="EndAndExpand" 
-HorizontalTextAlignment="End"/>
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
                                         <Label Text="Restday: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalRegularRestdayHours, StringFormat='{0:N2}'}" 
+                                    WidthRequest="50"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"/>
                                         <Label Text="{Binding PaySlip.ComputedRegularRestdayAmount, StringFormat='{0:N2}'}" 
-HorizontalOptions="EndAndExpand" 
-HorizontalTextAlignment="End"/>
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
                                     </StackLayout>
 
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
@@ -216,7 +243,7 @@ HorizontalTextAlignment="End"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
                                         <Label Text="Loan Balance: " />
-                                        <Label Text="{Binding PaySlip.LoanBalance, StringFormat='{0:N2}'}" 
+                                        <Label Text="{Binding PaySlip.LoanBalances, StringFormat='{0:N2}'}" 
                                     HorizontalOptions="EndAndExpand" 
                                     HorizontalTextAlignment="End"/>
                                     </StackLayout>

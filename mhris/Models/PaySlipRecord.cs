@@ -41,6 +41,11 @@ namespace mhris.Models
         public int PreparedBy { get; set; }
         public decimal TotalWorkingHours { get; set; }
         public decimal? LeaveBalance { get; set; }
-        public decimal? LoanBalance { get; set; }
+        public decimal? LoanBalances { get; set; }
+        public decimal TotalLegalHolidayWorkingHours { get; set; }
+        public decimal TotalSpecialHolidayWorkingHours { get; set; }
+        public decimal TotalRegularNightHours { get; set; }
+        public decimal TotalRegularRestdayHours { get; set; }
+        public decimal TotalRegularOvertimeHours { get; set; }
     }
 }
