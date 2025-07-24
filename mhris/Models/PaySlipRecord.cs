@@ -47,5 +47,6 @@ namespace mhris.Models
         public decimal TotalRegularNightHours { get; set; }
         public decimal TotalRegularRestdayHours { get; set; }
         public decimal TotalRegularOvertimeHours { get; set; }
+        public string LeaveBalanceBreakdown { get; set; }
     }
 }
