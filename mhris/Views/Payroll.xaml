@@ -66,39 +66,66 @@
                                     HorizontalTextAlignment="End"/>
                                     </StackLayout>
 
+                 
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Breakdown: " FontAttributes="Bold" />
+                                        <Label Text="Breakdown: " FontAttributes="Bold" VerticalOptions="Center"/>
+                                        <Label Text="Hrs" FontAttributes="Bold" VerticalOptions="Center" HorizontalTextAlignment="Center" Margin="80,0,0,0"/>
                                     </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="Legal Holiday: " WidthRequest="150"/>
-                                        <Label Text="{Binding PaySlip.TotalLegalHolidayWorkingAmount , StringFormat='{0:N2}'}" 
-HorizontalOptions="EndAndExpand" 
-HorizontalTextAlignment="End"/>
 
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Label Text="Legal Holiday: " WidthRequest="150" VerticalOptions="Center"/>
+
+
+                                        <Label Text="{Binding PaySlip.TotalLegalHolidayWorkingHours, StringFormat='{0:N2}'}" 
+                                    WidthRequest="50"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"/>
+
+                                        <Label Text="{Binding PaySlip.TotalLegalHolidayWorkingAmount , StringFormat='{0:N2}'}" 
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"
+                                    VerticalOptions="Center"/>
                                     </StackLayout>
+                                    
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
                                         <Label Text="Special Holiday: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalSpecialHolidayWorkingHours, StringFormat='{0:N2}'}" 
+                                    WidthRequest="50"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"/>
                                         <Label Text="{Binding PaySlip.TotalSpecialHolidayWorkingAmount, StringFormat='{0:N2}'}" 
-HorizontalOptions="EndAndExpand" 
-HorizontalTextAlignment="End"/>
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
                                         <Label Text="Night Diff: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalRegularNightHours, StringFormat='{0:N2}'}" 
+                                    WidthRequest="50"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"/>
                                         <Label Text="{Binding PaySlip.TotalRegularNightAmount, StringFormat='{0:N2}'}" 
-HorizontalOptions="EndAndExpand" 
-HorizontalTextAlignment="End"/>
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
                                         <Label Text="Overtime: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalRegularOvertimeHours, StringFormat='{0:N2}'}" 
+                                    WidthRequest="50"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"/>
                                         <Label Text="{Binding PaySlip.TotalRegularOvertimeAmount, StringFormat='{0:N2}'}" 
-HorizontalOptions="EndAndExpand" 
-HorizontalTextAlignment="End"/>
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
                                         <Label Text="Restday: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalRegularRestdayHours, StringFormat='{0:N2}'}" 
+                                    WidthRequest="50"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"/>
                                         <Label Text="{Binding PaySlip.ComputedRegularRestdayAmount, StringFormat='{0:N2}'}" 
-HorizontalOptions="EndAndExpand" 
-HorizontalTextAlignment="End"/>
+                                    HorizontalOptions="EndAndExpand" 
+                                    HorizontalTextAlignment="End"/>
                                     </StackLayout>
 
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
@@ -210,13 +237,18 @@ HorizontalTextAlignment="End"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
                                         <Label Text="Leave Balance: " />
-                                        <Label Text="{Binding PaySlip.LeaveBalance, StringFormat='{0:N2}'}" 
-                                    HorizontalOptions="EndAndExpand" 
-                                    HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout x:Name="StackLeaveBalance" Orientation="Horizontal" Margin="0,10,0,0">
+                                        <richTextEditor:SfRichTextEditor x:Name="LeaveBalanceBreakdown" 
+                                                                  Text="{Binding PaySlip.LeaveBalanceBreakdown}"
+                                                                  ReadOnly="True"
+                                                                  ShowToolbar="False"
+                                                                  BackgroundColor="#fffafafa"
+                                                                  HorizontalOptions="EndAndExpand"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
                                         <Label Text="Loan Balance: " />
-                                        <Label Text="{Binding PaySlip.LoanBalance, StringFormat='{0:N2}'}" 
+                                        <Label Text="{Binding PaySlip.LoanBalances, StringFormat='{0:N2}'}" 
                                     HorizontalOptions="EndAndExpand" 
                                     HorizontalTextAlignment="End"/>
                                     </StackLayout>
@@ -229,6 +261,96 @@ HorizontalTextAlignment="End"/>
                                     </StackLayout>
                                 </StackLayout>
                             </ScrollView>
+                        </tabview:SfTabItem.Content>
+                    </tabview:SfTabItem>
+                    <tabview:SfTabItem Title="DTR" >
+                        <tabview:SfTabItem.Content>
+                            <StackLayout Orientation="Vertical">
+                                <comboBox:SfComboBox x:Name="DTRId"
+                HorizontalOptions="FillAndExpand"
+                DataSource="{Binding DTRNumbers}"
+                SelectedItem="{Binding SelectedDTR}"
+                DisplayMemberPath="DTRNumber"
+                SuggestionMode="Contains"
+                SelectionChanged="DTRId_SelectionChanged">
+                                </comboBox:SfComboBox>
+                                <ListView x:Name="DTRSlipList" ItemsSource="{Binding DTRSlip}" RowHeight="330" HasUnevenRows="False">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <StackLayout Orientation="Vertical" Margin="0,5,0,0">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Date: " WidthRequest="150" FontAttributes="Bold"></Label>
+                                                        <Label Text="{Binding Date}" FontAttributes="Bold"></Label>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="DayType: " WidthRequest="150"></Label>
+                                                        <Label Text="{Binding DayType}"></Label>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Time In1: " WidthRequest="150"></Label>
+                                                        <Label Text="{Binding TimeIn1}"></Label>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Time Out1: " WidthRequest="150"></Label>
+                                                        <Label Text="{Binding TimeOut1}"></Label>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Time In2: " WidthRequest="150"></Label>
+                                                        <Label Text="{Binding TimeIn2}"></Label>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Time Out2: " WidthRequest="150"></Label>
+                                                        <Label Text="{Binding TimeOut2}"></Label>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Absent: " WidthRequest="150"></Label>
+                                                        <Label Text="{Binding Absent}"></Label>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Reg Hr(s):" WidthRequest="150"></Label>
+                                                        <Label Text="{Binding RegularHours, StringFormat='{0:N2}'}"
+                                           HorizontalOptions="EndAndExpand" 
+                                           HorizontalTextAlignment="End"></Label>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="OT Hr(s):" WidthRequest="150"></Label>
+                                                        <Label Text="{Binding OvertimeHours, StringFormat='{0:N2}'}"
+                                           HorizontalOptions="EndAndExpand" 
+                                           HorizontalTextAlignment="End"></Label>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Night Hr(s):" WidthRequest="150"></Label>
+                                                        <Label Text="{Binding NightHours, StringFormat='{0:N2}'}" 
+                                           HorizontalOptions="EndAndExpand" 
+                                           HorizontalTextAlignment="End"></Label>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Tardy Late Hr(s):" WidthRequest="150"></Label>
+                                                        <Label Text="{Binding TardyLateHours, StringFormat='{0:N2}'}" 
+                                           HorizontalOptions="EndAndExpand" 
+                                           HorizontalTextAlignment="End"></Label>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Tardy UT Hr(s):" WidthRequest="150"></Label>
+                                                        <Label Text="{Binding TardyUndertimeHours, StringFormat='{0:N2}'}" 
+                                           HorizontalOptions="EndAndExpand" 
+                                           HorizontalTextAlignment="End"></Label>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Net Hr(s):" WidthRequest="150"  FontAttributes="Bold"></Label>
+                                                        <Label Text="{Binding NetTotalHours, StringFormat='{0:N2}'}" 
+                                           HorizontalOptions="EndAndExpand" 
+                                           HorizontalTextAlignment="End"
+                                           FontAttributes="Bold"></Label>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </ViewCell>
+
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
                         </tabview:SfTabItem.Content>
                     </tabview:SfTabItem>
                     <tabview:SfTabItem Title="BIOMETRIC" IsVisible="True">
@@ -292,103 +414,13 @@ HorizontalTextAlignment="End"/>
                             </StackLayout>
                         </tabview:SfTabItem.Content>
                     </tabview:SfTabItem>
-                    <tabview:SfTabItem Title="MAP" IsVisible="True">
+                     <tabview:SfTabItem Title="MAP" IsVisible="False">
                         <tabview:SfTabItem.Content>
                             <renderers:MWebView x:Name="mapWebView"
                                  VerticalOptions="FillAndExpand"
                                  HorizontalOptions="FillAndExpand" />
                         </tabview:SfTabItem.Content>
-                    </tabview:SfTabItem>
-                    <tabview:SfTabItem Title="DTR" >
-                        <tabview:SfTabItem.Content>
-                            <StackLayout Orientation="Vertical">
-                                <comboBox:SfComboBox x:Name="DTRId"
-                                    HorizontalOptions="FillAndExpand"
-                                    DataSource="{Binding DTRNumbers}"
-                                    SelectedItem="{Binding SelectedDTR}"
-                                    DisplayMemberPath="DTRNumber"
-                                    SuggestionMode="Contains"
-                                    SelectionChanged="DTRId_SelectionChanged">
-                                </comboBox:SfComboBox>
-                                <ListView x:Name="DTRSlipList" ItemsSource="{Binding DTRSlip}" RowHeight="330" HasUnevenRows="False">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <ViewCell>
-                                                <StackLayout Orientation="Vertical" Margin="0,5,0,0">
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Date: " WidthRequest="150" FontAttributes="Bold"></Label>
-                                                        <Label Text="{Binding Date}" FontAttributes="Bold"></Label>
-                                                    </StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="DayType: " WidthRequest="150"></Label>
-                                                        <Label Text="{Binding DayType}"></Label>
-                                                    </StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Time In1: " WidthRequest="150"></Label>
-                                                        <Label Text="{Binding TimeIn1}"></Label>
-                                                    </StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Time Out1: " WidthRequest="150"></Label>
-                                                        <Label Text="{Binding TimeOut1}"></Label>
-                                                    </StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Time In2: " WidthRequest="150"></Label>
-                                                        <Label Text="{Binding TimeIn2}"></Label>
-                                                    </StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Time Out2: " WidthRequest="150"></Label>
-                                                        <Label Text="{Binding TimeOut2}"></Label>
-                                                    </StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Absent: " WidthRequest="150"></Label>
-                                                        <Label Text="{Binding Absent}"></Label>
-                                                    </StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Reg Hr(s):" WidthRequest="150"></Label>
-                                                        <Label Text="{Binding RegularHours, StringFormat='{0:N2}'}"
-                                                               HorizontalOptions="EndAndExpand" 
-                                                               HorizontalTextAlignment="End"></Label>
-                                                    </StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="OT Hr(s):" WidthRequest="150"></Label>
-                                                        <Label Text="{Binding OvertimeHours, StringFormat='{0:N2}'}"
-                                                               HorizontalOptions="EndAndExpand" 
-                                                               HorizontalTextAlignment="End"></Label>
-                                                    </StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Night Hr(s):" WidthRequest="150"></Label>
-                                                        <Label Text="{Binding NightHours, StringFormat='{0:N2}'}" 
-                                                               HorizontalOptions="EndAndExpand" 
-                                                               HorizontalTextAlignment="End"></Label>
-                                                    </StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Tardy Late Hr(s):" WidthRequest="150"></Label>
-                                                        <Label Text="{Binding TardyLateHours, StringFormat='{0:N2}'}" 
-                                                               HorizontalOptions="EndAndExpand" 
-                                                               HorizontalTextAlignment="End"></Label>
-                                                    </StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Tardy UT Hr(s):" WidthRequest="150"></Label>
-                                                        <Label Text="{Binding TardyUndertimeHours, StringFormat='{0:N2}'}" 
-                                                               HorizontalOptions="EndAndExpand" 
-                                                               HorizontalTextAlignment="End"></Label>
-                                                    </StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Net Hr(s):" WidthRequest="150"  FontAttributes="Bold"></Label>
-                                                        <Label Text="{Binding NetTotalHours, StringFormat='{0:N2}'}" 
-                                                               HorizontalOptions="EndAndExpand" 
-                                                               HorizontalTextAlignment="End"
-                                                               FontAttributes="Bold"></Label>
-                                                    </StackLayout>
-                                                </StackLayout>
-                                            </ViewCell>
-
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </StackLayout>
-                        </tabview:SfTabItem.Content>
-                    </tabview:SfTabItem>
+                    </tabview:SfTabItem>                
                     <tabview:SfTabItem Title="LOGOUT">
                         <tabview:SfTabItem.Content>
                             <StackLayout>
