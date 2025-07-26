@@ -48,5 +48,7 @@ namespace mhris.Models
         public decimal TotalRegularRestdayHours { get; set; }
         public decimal TotalRegularOvertimeHours { get; set; }
         public string LeaveBalanceBreakdown { get; set; }
+        public string OtherIncomeNonTaxableBreakdown { get; set; }
+        public string LoanBalancesBreakdown { get; set; }
     }
 }
