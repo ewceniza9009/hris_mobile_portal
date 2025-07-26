@@ -18,6 +18,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <!-- Theme resource dictionary -->
                 <syncTheme:DarkTheme />
+               
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -135,8 +136,8 @@
                                     HorizontalTextAlignment="End"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Label Text="LESS: Tardy: " WidthRequest="150"/>
-                                        <Label Text="{Binding PaySlip.TotalTardyAmou`nt, StringFormat='{0:N2}'}" 
+                                        <Label Text="LESS:    Tardy: " WidthRequest="150"/>
+                                        <Label Text="{Binding PaySlip.TotalTardyAmount, StringFormat='{0:N2}'}" 
                                     HorizontalOptions="EndAndExpand" 
                                     HorizontalTextAlignment="End"/>
                                     </StackLayout>
@@ -159,6 +160,7 @@
                                     HorizontalOptions="EndAndExpand" 
                                     HorizontalTextAlignment="End"/>
                                     </StackLayout>
+                                    
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
                                         <Label Text="Income: " />
                                         <Label Text="{Binding PaySlip.GrossIncome, StringFormat='{0:N2}'}" 
@@ -170,6 +172,14 @@
                                         <Label Text="{Binding PaySlip.TotalOtherIncomeNonTaxable, StringFormat='{0:N2}'}" 
                                     HorizontalOptions="EndAndExpand" 
                                     HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout x:Name="StackOtherIncomeNonTaxable" Orientation="Horizontal" Margin="0,10,0,0">
+                                        <richTextEditor:SfRichTextEditor x:Name="OtherIncomeNonTaxableBreakdown" 
+                                    Text="{Binding PaySlip.OtherIncomeNonTaxableBreakdown}"
+                                    ReadOnly="True"
+                                    ShowToolbar="False"
+                                    BackgroundColor="#fffafafa"
+                                    HorizontalOptions="EndAndExpand"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
                                         <Label Text="Gross Income: " />
@@ -251,6 +261,14 @@
                                         <Label Text="{Binding PaySlip.LoanBalances, StringFormat='{0:N2}'}" 
                                     HorizontalOptions="EndAndExpand" 
                                     HorizontalTextAlignment="End"/>
+                                    </StackLayout>
+                                    <StackLayout x:Name="StackLoanBalance" Orientation="Horizontal" Margin="0,10,0,0">
+                                        <richTextEditor:SfRichTextEditor x:Name="LoanBalancesBreakdown" 
+                                    Text="{Binding PaySlip.LoanBalancesBreakdown}"
+                                    ReadOnly="True"
+                                    ShowToolbar="False"
+                                    BackgroundColor="#fffafafa"
+                                    HorizontalOptions="EndAndExpand"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
                                         <Label Text="Net Pay: " FontAttributes="Bold"/>
