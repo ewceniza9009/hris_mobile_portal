@@ -443,6 +443,7 @@
                         <tabview:SfTabItem.Content>
                             <StackLayout>
                                 <button:SfButton Text="LOGOUT" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Clicked="SfButton_Clicked"/>
+                                <Label Text="MHRIS Version 1.0.1" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14"/>
                             </StackLayout>
                         </tabview:SfTabItem.Content>
                     </tabview:SfTabItem>
